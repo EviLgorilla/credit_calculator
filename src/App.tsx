@@ -1,15 +1,12 @@
-import { createBrowserHistory } from "history";
 import React from "react";
 import "./App.css";
-import { Route, Router, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { MainLayout } from "./layouts/main-layout";
 import { routes } from "./routes";
 
-const customHistory = createBrowserHistory();
-
 function App() {
     return (
-        <Router history={ customHistory }>
+        <BrowserRouter>
             <MainLayout>
                 <Switch>
                     { routes.map(route => (
@@ -19,7 +16,7 @@ function App() {
                     )) }
                 </Switch>
             </MainLayout>
-        </Router>
+        </BrowserRouter>
     );
 }
 
