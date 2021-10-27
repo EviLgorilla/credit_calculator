@@ -1,10 +1,9 @@
-import type { ReactNode } from "react";
 import { BankPage } from "../pages/bank-page";
 import { CreditPage } from "../pages/credit-page";
 
 type route = {
     id: number,
-    component: ReactNode,
+    component: any,
     navigation: string,
     path: string
 }
