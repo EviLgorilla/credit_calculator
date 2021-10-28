@@ -1,14 +1,20 @@
 import { Col, Form, InputNumber, Row, Select } from "antd";
-import React from "react";
+import React, { FunctionComponent } from "react";
 
 const normalizeNumberValue = (value: any) => {
     return value ? value.toString() : null;
 };
 
-const CalculatorForm = () => {
-    const [form] = Form.useForm();
+type CalculateFormProps = {
+    form: any,
+    onValuesChange: (values: any) => void,
+    optionsBank: any[],
+}
+
+const CalculatorForm: FunctionComponent<CalculateFormProps> = ({ form, onValuesChange, optionsBank }) => {
+
     return (
-        <Form form={ form } layout="vertical">
+        <Form form={ form } layout="vertical" onValuesChange={ onValuesChange }>
             <Row gutter={ [24, 24] }>
                 <Col span={ 8 }>
                     <Form.Item
@@ -34,12 +40,17 @@ const CalculatorForm = () => {
                     <Form.Item
                         name="bank"
                         label="Bank"
-                        rules={ [{ required: true, min: 0, max: 5000000 }] }
-                        normalize={ normalizeNumberValue }
                     >
                         <Select>
-                            <Select.Option value={'privat'}>PRIVATBANK</Select.Option>
-                            <Select.Option value={'mono'} disabled>MONOBANK</Select.Option>
+                            { optionsBank.map(bankItem => (
+                                <Select.Option
+                                    key={ bankItem.value }
+                                    value={ bankItem.value }
+                                    disabled={ bankItem.disabled }
+                                >
+                                    { bankItem.name }
+                                </Select.Option>
+                            )) }
                         </Select>
                     </Form.Item>
                 </Col>

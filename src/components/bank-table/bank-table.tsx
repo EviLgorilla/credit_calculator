@@ -1,9 +1,12 @@
-import { Space, Table } from "antd";
-import React from "react";
+import { Button, Space, Table } from "antd";
+import React, { FunctionComponent } from "react";
 
+type BankTableProps = {
+    data: any[]
+    onRemove: (id: any) => void
+}
 
-
-const BankTable = () => {
+const BankTable: FunctionComponent<BankTableProps> = ({ onRemove, data }) => {
     const columns = [
         {
             title: "bankName",
@@ -35,20 +38,9 @@ const BankTable = () => {
             key: "action",
             render: (text: any, record: any) => (
                 <Space size="middle">
-                    <span>Delete: { record.key }</span>
+                    <Button onClick={ () => onRemove(record.key) }>Delete</Button>
                 </Space>
             )
-        }
-    ];
-
-    const data = [
-        {
-            key: "1",
-            bankName: "PRIVAT BANK",
-            rate: 32,
-            max: 3200000,
-            minPayment: 120000,
-            period: 36
         }
     ];
 

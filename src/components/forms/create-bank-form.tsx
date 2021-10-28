@@ -4,6 +4,7 @@ import React, { FunctionComponent, useCallback, useMemo } from "react";
 type BankFormProps = {
     onCancel: () => void,
     onSubmit: (value: any) => void
+    form: any,
 }
 
 const CREDIT_PERIODS = [12, 24, 32];
@@ -12,9 +13,7 @@ const normalizeNumberValue = (value: any) => {
     return value ? value.toString() : null;
 };
 
-const CreateBankForm: FunctionComponent<BankFormProps> = ({ onCancel, onSubmit }) => {
-    const [form] = Form.useForm();
-
+const CreateBankForm: FunctionComponent<BankFormProps> = ({ onCancel, onSubmit, form }) => {
     const maxCreditPeriod = useMemo(() => {
         const index = Math.round(Math.random() * 3) - 1;
         return CREDIT_PERIODS[index];
@@ -22,7 +21,7 @@ const CreateBankForm: FunctionComponent<BankFormProps> = ({ onCancel, onSubmit }
     
     const onUpdatePeriodFormValue = useCallback(value => {
         form.setFieldsValue({
-            period: value
+            period: value ? value.toString() : null
         });
     }, [form]);
 
